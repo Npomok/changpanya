@@ -196,7 +196,7 @@ export default function Home() {
                   
                   <div className="flex justify-between items-center pt-6 border-t border-slate-100">
                      <div className="flex flex-col">
-                        <span className="text-xs text-slate-400 font-light uppercase">ราคา</span>
+                        <span className="text-xs text-slate-400 font-light uppercase">สนใจสั่งซื้อ</span>
                         <span className="text-2xl font-bold text-emerald-700">{truck.price}</span>
                      </div>
                      <div className="bg-emerald-900 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-700 transition shadow-lg group-hover:rotate-45 duration-300">
