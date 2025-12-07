@@ -119,7 +119,7 @@ export default function TruckDetail({ params }) {
           <div>
              <h1 className="text-3xl md:text-4xl font-serif font-bold text-emerald-950 mb-2">{truck.title}</h1>
              <div className="text-3xl font-bold text-emerald-700 mb-6 bg-emerald-50 inline-block px-4 py-2 rounded-lg border border-emerald-100">
-                {truck.price} <span className="text-sm font-normal text-slate-500">บาท</span>
+                {truck.price} <span className="text-sm font-normal text-slate-500">-</span>
              </div>
 
              {/* กล่องสเปคย่อ */}

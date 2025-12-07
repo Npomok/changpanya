@@ -129,7 +129,7 @@ export default function StockPage() {
                   
                   <div className="flex justify-between items-end border-t border-gray-100 pt-4">
                      <div>
-                        <p className="text-xs text-slate-400">ราคาขาย</p>
+                        <p className="text-xs text-slate-400">สนใจสั่งซื้อ</p>
                         <p className="text-xl font-bold text-emerald-700">{truck.price}</p>
                      </div>
                      <span className="text-emerald-600 text-sm font-bold bg-emerald-50 px-3 py-1 rounded-full group-hover:bg-emerald-600 group-hover:text-white transition">
