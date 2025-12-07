@@ -3,11 +3,12 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabaseClient';
-import Link from 'next/link';
 
 export default function AdminPage() {
   const [loading, setLoading] = useState(false);
   const [session, setSession] = useState(null);
+  
+  // Login State
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
@@ -20,9 +21,9 @@ export default function AdminPage() {
     title: '', price: '', year: '', province: '', description: '', tag: 'มาใหม่'
   });
 
-  // ⭐ ตัวแปรจัดการรูปภาพ (แยกของเก่า กับ ของใหม่) ⭐
-  const [existingImages, setExistingImages] = useState([]); // เก็บลิ้งค์รูปเดิม (จาก Database)
-  const [selectedFiles, setSelectedFiles] = useState([]);   // เก็บไฟล์รูปใหม่ (ที่เพิ่งเลือกจากเครื่อง)
+  // ⭐ ตัวแปรจัดการรูปภาพ
+  const [existingImages, setExistingImages] = useState([]); 
+  const [selectedFiles, setSelectedFiles] = useState([]);   
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -46,8 +47,11 @@ export default function AdminPage() {
     e.preventDefault();
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) alert('รหัสผ่านไม่ถูกต้อง');
-    else window.location.reload();
+    if (error) {
+        alert('รหัสผ่านไม่ถูกต้อง หรือ อีเมลผิด');
+    } else {
+        window.location.reload();
+    }
     setLoading(false);
   };
 
@@ -56,7 +60,6 @@ export default function AdminPage() {
     window.location.reload();
   };
 
-  // เลือกไฟล์ใหม่เพิ่ม (ไม่ทับของเดิม)
   const handleFileSelect = (e) => {
     if (e.target.files) {
       const newFiles = Array.from(e.target.files);
@@ -64,12 +67,10 @@ export default function AdminPage() {
     }
   };
 
-  // ลบไฟล์ใหม่ที่เลือกผิด (ยังไม่อัปโหลด)
   const removeSelectedFile = (index) => {
     setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // ⭐ ลบรูปเดิมที่มีอยู่แล้ว (ลบออกจากหน้าจอเฉยๆ ยังไม่ลบจาก Database จนกว่าจะกดบันทึก)
   const removeExistingImage = (index) => {
     setExistingImages((prev) => prev.filter((_, i) => i !== index));
   };
@@ -92,11 +93,11 @@ export default function AdminPage() {
         }
       }
 
-      // 2. รวมรูปเก่าที่เหลืออยู่ + รูปใหม่ที่เพิ่งอัปโหลด
+      // 2. รวมรูป
       const finalImages = [...existingImages, ...newImageUrls];
 
-      // เช็คว่ามีรูปเหลือไหม
       if (finalImages.length === 0) {
+        setLoading(false);
         return alert('กรุณาเลือกรูปภาพอย่างน้อย 1 รูป');
       }
 
@@ -129,9 +130,8 @@ export default function AdminPage() {
     setFormData({
       title: truck.title, price: truck.price, year: truck.year, province: truck.province, description: truck.description, tag: truck.tag
     });
-    // ⭐ ดึงรูปเก่ามาใส่ในตัวแปร existingImages
     setExistingImages(truck.images || []); 
-    setSelectedFiles([]); // เคลียร์ไฟล์ใหม่ที่ค้างอยู่
+    setSelectedFiles([]); 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -142,8 +142,49 @@ export default function AdminPage() {
     }
   };
 
-  if (!session) return <div className="min-h-screen flex items-center justify-center bg-stone-100">Please Login...</div>;
+  // ⭐⭐⭐ ส่วนที่แก้ไข: เพิ่มหน้าจอ Login กลับเข้ามา ⭐⭐⭐
+  if (!session) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-stone-100 px-4">
+        <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-200">
+            <h1 className="text-2xl font-bold text-emerald-800 mb-6 text-center">เข้าสู่ระบบหลังบ้าน</h1>
+            <form onSubmit={handleLogin} className="space-y-4">
+                <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-1">Email</label>
+                    <input 
+                        type="email" 
+                        required
+                        value={email} 
+                        onChange={(e) => setEmail(e.target.value)} 
+                        className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500" 
+                        placeholder="admin@example.com"
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-1">Password</label>
+                    <input 
+                        type="password" 
+                        required
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
+                        className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500" 
+                        placeholder="••••••••"
+                    />
+                </div>
+                <button 
+                    type="submit" 
+                    disabled={loading}
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg shadow-md transition transform active:scale-95"
+                >
+                    {loading ? 'กำลังตรวจสอบ...' : 'เข้าสู่ระบบ'}
+                </button>
+            </form>
+        </div>
+      </div>
+    );
+  }
 
+  // ส่วนแสดงผลเมื่อ Login แล้ว (เหมือนเดิม)
   return (
     <div className="min-h-screen bg-stone-50 font-sans text-slate-600 pb-20">
       <nav className="bg-emerald-900 text-white p-4 shadow-md mb-8">
@@ -175,7 +216,7 @@ export default function AdminPage() {
                <div><label className="block text-sm font-bold mb-1">สถานะ</label><select value={formData.tag} onChange={(e) => setFormData({...formData, tag: e.target.value})} className="w-full p-3 border rounded-lg"><option value="มาใหม่">🔥 มาใหม่</option><option value="แนะนำ">⭐ แนะนำ</option><option value="ขายด่วน">⚡ ขายด่วน</option></select></div>
             </div>
             
-            {/* ⭐ ส่วนจัดการรูปภาพ (ทั้งเก่าและใหม่) ⭐ */}
+            {/* ส่วนจัดการรูปภาพ */}
             <div className={`p-5 rounded-xl border-2 border-dashed ${editingId ? 'bg-blue-50 border-blue-400' : 'bg-emerald-50 border-emerald-400'}`}>
               <label className="block text-base font-bold mb-3 text-slate-700">จัดการรูปภาพ/วิดีโอ</label>
               
@@ -186,35 +227,21 @@ export default function AdminPage() {
                 </div>
               </div>
 
-              {/* Area แสดงรูปทั้งหมด (รวมเก่าและใหม่) */}
               {(existingImages.length > 0 || selectedFiles.length > 0) && (
                 <div className="mt-4 grid grid-cols-4 sm:grid-cols-6 gap-3">
-                  
-                  {/* 1. แสดงรูปเก่า (Existing) */}
                   {existingImages.map((url, index) => (
                     <div key={`old-${index}`} className="relative aspect-square group">
-                      {/* กรอบสีส้ม บอกว่าเป็นรูปเก่า */}
                       <div className="absolute top-0 left-0 bg-orange-500 text-white text-[9px] px-1 rounded-br z-10">รูปเดิม</div>
                       <img 
                         src={url} 
                         className="w-full h-full object-cover rounded-lg border-2 border-orange-200"
                         onError={(e) => {e.target.src = 'https://via.placeholder.com/100?text=Video'}}
                       />
-                      <button
-                        type="button"
-                        onClick={() => removeExistingImage(index)}
-                        className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-7 h-7 flex items-center justify-center shadow-md hover:bg-red-800 transition font-bold border-2 border-white z-10"
-                        title="ลบรูปเดิมนี้ออก"
-                      >
-                        ✕
-                      </button>
+                      <button type="button" onClick={() => removeExistingImage(index)} className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-7 h-7 flex items-center justify-center shadow-md hover:bg-red-800 transition font-bold border-2 border-white z-10">✕</button>
                     </div>
                   ))}
-
-                  {/* 2. แสดงรูปใหม่ (New Selected) */}
                   {selectedFiles.map((file, index) => (
                     <div key={`new-${index}`} className="relative aspect-square group">
-                      {/* กรอบสีเขียว บอกว่าเป็นรูปใหม่ */}
                       <div className="absolute top-0 left-0 bg-emerald-500 text-white text-[9px] px-1 rounded-br z-10">รูปใหม่</div>
                       <img 
                         src={URL.createObjectURL(file)} 
@@ -222,28 +249,19 @@ export default function AdminPage() {
                         onLoad={(e) => URL.revokeObjectURL(e.target.src)}
                         onError={(e) => {e.target.src = 'https://via.placeholder.com/100?text=New'}}
                       />
-                      <button
-                        type="button"
-                        onClick={() => removeSelectedFile(index)}
-                        className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-7 h-7 flex items-center justify-center shadow-md hover:bg-red-800 transition font-bold border-2 border-white z-10"
-                        title="ยกเลิกรูปนี้"
-                      >
-                        ✕
-                      </button>
+                      <button type="button" onClick={() => removeSelectedFile(index)} className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-7 h-7 flex items-center justify-center shadow-md hover:bg-red-800 transition font-bold border-2 border-white z-10">✕</button>
                     </div>
                   ))}
-
                 </div>
               )}
               
               <div className="text-right mt-2 text-xs text-slate-400">
-                 รวมทั้งหมด {existingImages.length + selectedFiles.length} รูป (เก่า {existingImages.length} + ใหม่ {selectedFiles.length})
+                  รวมทั้งหมด {existingImages.length + selectedFiles.length} รูป (เก่า {existingImages.length} + ใหม่ {selectedFiles.length})
               </div>
             </div>
             
             <div><label className="block text-sm font-bold mb-1">รายละเอียด</label><textarea rows="4" required value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} className="w-full p-3 border rounded-lg"></textarea></div>
             
-            {/* ปุ่มบันทึก */}
             {editingId ? (
               <button type="submit" disabled={loading} className="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-5 rounded-xl shadow-lg text-xl transition transform hover:scale-[1.01] border-b-4 border-blue-900">
                 {loading ? '⏳ กำลังบันทึก...' : '💾 บันทึกการแก้ไข'}
