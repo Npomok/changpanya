@@ -129,17 +129,14 @@ export default function TruckDetail({ params }) {
                 </h3>
                 <div className="grid grid-cols-2 gap-y-4 gap-x-2">
                    <div>
-                      <span className="text-xs text-slate-400 uppercase">ปีจดทะเบียน</span><br/>
+                      <span className="text-xs text-slate-400 uppercase">อุปกรณ์ที่ใช้</span><br/>
                       <span className="font-bold text-slate-700">{truck.year}</span>
                    </div>
                    <div>
                       <span className="text-xs text-slate-400 uppercase">จังหวัด</span><br/>
                       <span className="font-bold text-slate-700">{truck.province}</span>
                    </div>
-                   <div>
-                      <span className="text-xs text-slate-400 uppercase">สถานะ</span><br/>
-                      <span className="inline-block bg-emerald-100 text-emerald-700 text-xs px-2 py-1 rounded-full font-bold">{truck.tag || 'พร้อมขาย'}</span>
-                   </div>
+                   
                 </div>
              </div>
 
