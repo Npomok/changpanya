@@ -124,7 +124,7 @@ export default function StockPage() {
                 <div className="p-6 flex flex-col flex-1 justify-between">
                   <div>
                     <h4 className="font-bold text-lg mb-2 text-slate-800 line-clamp-1">{truck.title}</h4>
-                    <p className="text-xs text-slate-400 mb-4">จังหวัด: {truck.province} | ปี: {truck.year}</p>
+                    <p className="text-xs text-slate-400 mb-4">จังหวัด: {truck.province} |  {truck.year}</p>
                   </div>
                   
                   <div className="flex justify-between items-end border-t border-gray-100 pt-4">
