@@ -41,24 +41,24 @@ export default function ContactPage() {
              
              <div className="space-y-6">
                {/* 1. เบอร์โทร */}
-               <a href="tel:0947090666" className="flex items-center gap-4 p-4 rounded-xl bg-emerald-50 hover:bg-emerald-100 transition group cursor-pointer border border-emerald-100">
+               <a href="tel:0802093458" className="flex items-center gap-4 p-4 rounded-xl bg-emerald-50 hover:bg-emerald-100 transition group cursor-pointer border border-emerald-100">
                   <div className="bg-emerald-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition">
                     📞
                   </div>
                   <div>
-                    <p className="text-sm text-slate-500">โทรสอบถาม (ช่างปัญญา)(หรือคลิกที่นี่)</p>
-                    <p className="text-xl font-bold text-emerald-900">094-709-0666</p>
+                    <p className="text-sm text-slate-500">โทรสอบถาม (หรือคลิกที่นี่)</p>
+                    <p className="text-xl font-bold text-emerald-900">080-209-3458</p>
                   </div>
                </a>
 
-               {/* 2. ไลน์ (LINE) */}
-               <a href="https://line.me/ti/p/YdqPOt9avg" target="_blank" className="flex items-center gap-4 p-4 rounded-xl bg-[#06C755]/10 hover:bg-[#06C755]/20 transition group cursor-pointer border border-[#06C755]/20">
+               {/* 2. เพจ (Facebook) */}
+               <a href="https://www.facebook.com/profile.php?id=61584981843081&locale=th_TH" target="_blank" className="flex items-center gap-4 p-4 rounded-xl bg-[#06C755]/10 hover:bg-[#06C755]/20 transition group cursor-pointer border border-[#06C755]/20">
                   <div className="bg-[#06C755] text-white w-12 h-12 rounded-full flex items-center justify-center text-2xl group-hover:scale-110 transition">
                     💬
                   </div>
                   <div>
-                    <p className="text-sm text-slate-500">แอดไลน์มาคุยกัน(หรือคลิกที่นี่)</p>
-                    <p className="text-xl font-bold text-[#06C755]">Line ID: 0946172282</p>
+                    <p className="text-sm text-slate-500">เพจ Facebook(หรือคลิกที่นี่)</p>
+                    <p className="text-xl font-bold text-[#06C755]">ช่างปัญญา เกษตรยนต์</p>
                   </div>
                </a>
 
