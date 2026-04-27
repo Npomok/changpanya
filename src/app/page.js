@@ -114,8 +114,8 @@ export default function Home() {
         {/* กล่องเนื้อหาและช่องค้นหา */}
         <div className="relative z-20 max-w-4xl mx-auto px-4 mt-20">
           <h2 className="text-5xl md:text-7xl font-serif font-bold mb-6 drop-shadow-lg tracking-tight">
-            คัดสรรรถดัมพ์<br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">คุณภาพเยี่ยม</span>
+            🚨คัดสรรรถดัมพ์<br/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white">คุณภาพเยี่ยม พร้อมลุยงานหนัก🚨</span>
           </h2>
           <p className="text-emerald-50 mb-12 text-lg font-light max-w-2xl mx-auto leading-relaxed drop-shadow-md">
             เราสร้างและดูแลรถทุกคัน ตรวจเช็กละเอียดทุกจุด พร้อมส่งมอบความคุ้มค่าให้คุณ

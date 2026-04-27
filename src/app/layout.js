@@ -1,7 +1,7 @@
 // ไฟล์: src/app/layout.js
 import './globals.css'
 import Link from 'next/link'
-import Footer from './components/Footer'; // ⭐ บรรทัดนี้ที่ขาดไปครับ! ต้องเรียกไฟล์มาก่อนถึงจะใช้ได้
+import Footer from './components/Footer'; //  ต้องเรียกไฟล์มาก่อนถึงจะใช้ได้
 
 export const metadata = {
   title: 'ช่างปัญญา รถดั๊มซิ่ง - ศูนย์รวมรถดัมพ์ทางการเกษตร สุโขทัย',
@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
           {children}
         </div>
 
-        {/* เรียกใช้ Footer ตรงนี้ (ตอนนี้ใช้ได้แล้ว เพราะ import มาแล้ว) */}
+        {/* เรียกใช้ Footer ตรงนี้  */}
         <Footer />
 
       </body>
