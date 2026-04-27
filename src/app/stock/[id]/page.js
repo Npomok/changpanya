@@ -153,11 +153,11 @@ export default function TruckDetail({ params }) {
 
              {/* ปุ่มติดต่อ (Sticky ในมือถือ) */}
              <div className="flex flex-col gap-3 sticky bottom-4 z-40 bg-white/90 backdrop-blur p-4 rounded-xl shadow-2xl border border-emerald-100 lg:static lg:bg-transparent lg:p-0 lg:shadow-none lg:border-0">
-                <a href="tel:0947090666" className="bg-emerald-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-emerald-700 transition flex items-center justify-center gap-2 transform active:scale-95">
+                <a href="tel:0802093458" className="bg-emerald-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-emerald-700 transition flex items-center justify-center gap-2 transform active:scale-95">
                    📞 โทรสอบถามทันที
                 </a>
-                <a href="https://line.me/ti/p/YdqPOt9avg" target="_blank" className="bg-[#06C755] text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-[#05b34c] transition flex items-center justify-center gap-2 transform active:scale-95">
-                   💬 ทักไลน์ (LINE)
+                <a href="https://www.facebook.com/profile.php?id=61584981843081&locale=th_TH" target="_blank" className="bg-[#06C755] text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-[#05b34c] transition flex items-center justify-center gap-2 transform active:scale-95">
+                   💬 ทักไลน์ (เพจ Facebook)
                 </a>
              </div>
 
