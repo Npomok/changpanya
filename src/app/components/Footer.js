@@ -41,7 +41,7 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold text-white mb-4 border-l-4 border-emerald-500 pl-3">ติดต่อสอบถาม</h4>
             <ul className="space-y-3 text-sm">
-              <li>00900317698 , 0802093458 <br/></li>
+              <li>0900317698 , 0802093458 <br/></li>
               <li>ต.สามพวง อ.คีรีมาศ จ.สุโขทัย</li>
             </ul>
           </div>
