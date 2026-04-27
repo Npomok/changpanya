@@ -191,7 +191,7 @@ export default function Home() {
                   <h4 className="font-bold text-xl mb-3 text-slate-800">{truck.title}</h4>
                   <div className="flex items-center text-slate-500 text-sm mb-6 gap-4">
                      <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-400"></span>{truck.province}</span>
-                     <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-400"></span>ปี {truck.year}</span>
+                     
                   </div>
                   
                   <div className="flex justify-between items-center pt-6 border-t border-slate-100">
